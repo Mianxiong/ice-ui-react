@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import Button, { ButtonType, ButtonSize } from './components/Button/button'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
+import Transition from './components/Transition/transition'
+import Icon from './components/Icon/icon'
+library.add(fas)
 
-function App() {
+const App:React.FC = () => {
+  const [ show, setShow ] = useState(false)
   return (
     <div className="App">
       <header className="App-header">
-        <Menu defaultIndex='0' onSelect={(index) => {alert(index)}} mode="vertical"  defaultOpenSubMenus={['2']}>
+        {/*<Icon icon="arrow-down" theme="primary" size="10x" />*/}
+        {/*<Menu defaultIndex='0' onSelect={(index) => {alert(index)}} mode="vertical"  defaultOpenSubMenus={['2']}>*/}
+        {/*<Menu defaultIndex='0' onSelect={(index) => {alert(index)}} mode="vertical">*/}
+        <Menu defaultIndex='0' onSelect={(index) => {alert(index)}}>
           <MenuItem>
             cool link
           </MenuItem>
@@ -29,21 +38,42 @@ function App() {
         </Menu>
         <Button className="custom"> Hello </Button>
         <Button disabled> Disabled Button </Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}> Large Primary </Button>
-        <Button btnType={ButtonType.Danger} size={ButtonSize.Small}> Small Danger </Button>
-        <Button btnType={ButtonType.Link} href="http://www.baidu.com" target="_blank"> Baidu Link </Button>
-        <Button btnType={ButtonType.Link} href="http://www.baidu.com" disabled> Disabled Link </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        {/*<Button btnType={ButtonType.Primary} size={ButtonSize.Large}> Large Primary </Button>*/}
+        {/*<Button btnType={ButtonType.Danger} size={ButtonSize.Small}> Small Danger </Button>*/}
+        {/*<Button btnType={ButtonType.Link} href="http://www.baidu.com" target="_blank"> Baidu Link </Button>*/}
+        {/*<Button btnType={ButtonType.Link} href="http://www.baidu.com" disabled> Disabled Link </Button>*/}
+        <Button size="lg" onClick={() => { setShow(!show)}} > Toggle </Button>
+        <Transition
+            in={show}
+            timeout={300}
+            animation="zoom-in-left"
         >
-          Learn React
-        </a>
+          <div>
+            <p>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </p>
+            <p>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </p>
+            <p>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </p>
+            <p>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </p>
+            <p>
+              Edit <code>src/App.tsx</code> and save to reload.
+            </p>
+          </div>
+        </Transition>
+        <Transition
+            in={show}
+            timeout={300}
+            animation="zoom-in-top"
+            wrapper
+        >
+          <Button btnType="primary" size="lg">A Large Button </Button>
+        </Transition>
       </header>
     </div>
   );
